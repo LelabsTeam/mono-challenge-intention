@@ -23,6 +23,8 @@ services:
     image: postgres:14
     restart: unless-stopped
     container_name: db_lebiscuit
+    volumes:
+     - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: "lebiscuit"
       POSTGRES_DB: lebiscuit
