@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function (){
     Route::prefix('product')->group(function(){
         Route::get('/index', [ProductController::class, 'index'])->name('api.v1.product.index');
+        Route::get('/product_edit/{id}', [ProductController::class, 'productEdit'])->name('api.v1.product.product_edit');
     });
 });
 
