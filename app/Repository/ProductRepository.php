@@ -16,4 +16,9 @@ class ProductRepository extends RepositoryBase
     {
         return json_decode(Http::get('https://fakestoreapi.com/products'));
     }
+
+    public function productEdit($id)
+    {
+        return json_decode(Http::get('https://fakestoreapi.com/products/'.$id));
+    }
 }
