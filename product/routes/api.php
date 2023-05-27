@@ -16,3 +16,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['namespace' => 'Api\V1\Site'], function () use ($router) {
+    $router->get('/products', 'ProductController@index');
+    $router->post('/intentions', 'IntentionController@store');
+});
