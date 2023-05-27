@@ -5,7 +5,6 @@ services:
     container_name: intention_laravel
     working_dir: /var/www/intention
     depends_on:
-      - nginx
       - mysql
     build:
       context: ./intention/
@@ -18,8 +17,6 @@ services:
   lumen:
     container_name: product_lumen
     working_dir: /var/www/product
-    depends_on:
-      - nginx
     build:
       context: ./product/
       dockerfile: ./.docker/lumen/Dockerfile
@@ -31,6 +28,9 @@ services:
   nginx:
     container_name: gateway_nginx
     image: nginx:alpine
+    depends_on:
+      - laravel
+      - lumen
     ports:
       - 80:80
       - 430:443
