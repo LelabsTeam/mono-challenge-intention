@@ -24,10 +24,10 @@ trait SuportValidationRequest
     {
         return [
             'address' => 'array|required',
-            'address.*.street' => 'string|required',
-            'address.*.number' => 'string|required',
-            'address.*.post_code' => 'string|required',
-            'address.*.complement' => 'string|nullable',
+            'address.street' => 'string|required',
+            'address.number' => 'string|required',
+            'address.postcode' => 'string|required',
+            'address.complement' => 'string|nullable',
             'products' => 'array|required',
             'products.*.id' => 'numeric|required',
             'products.*.title' => 'string|required',
