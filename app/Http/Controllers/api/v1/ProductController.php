@@ -23,4 +23,13 @@ class ProductController extends Controller
             throw $th;
         }
     }
+
+    public function productEdit($id)
+    {
+        try {
+            return ProductResource::make($this->productRepository->productEdit($id));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
