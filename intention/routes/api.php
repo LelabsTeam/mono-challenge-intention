@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\Site\IntentionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(AuthController::class)->prefix('user')->group(function () {
+    Route::post('/login', 'loginUser')->name('login');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/', 'createUser')->name('register');
+        Route::post('/logout', 'logout')->name('logout');
+    });
 });
 
-Route::get('ping', fn() => 'pong');
+Route::controller(IntentionController::class)->as('intention.')->group(function () {
+    Route::get('intentions', 'index')->name('index');
+    Route::post('intentions', 'store')->middleware('auth:sanctum')->name('store');
+});
