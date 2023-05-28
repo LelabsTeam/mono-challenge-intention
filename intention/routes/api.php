@@ -24,7 +24,7 @@ Route::controller(AuthController::class)->prefix('user')->group(function () {
     });
 });
 
-Route::controller(IntentionController::class)->as('intention.')->group(function () {
+Route::controller(IntentionController::class)->prefix('v1')->as('intention.')->group(function () {
     Route::get('intentions', 'index')->name('index');
     Route::post('intentions', 'store')->middleware('auth:sanctum')->name('store');
 });

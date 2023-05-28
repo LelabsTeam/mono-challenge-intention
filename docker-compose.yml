@@ -13,29 +13,31 @@ services:
       - ./intention:/var/www/intention
     networks:
       - app-network
-  
-  lumen:
-    container_name: product_lumen
+
+  nest:
+    container_name: product_nest
     working_dir: /var/www/product
     build:
       context: ./product/
-      dockerfile: ./.docker/lumen/Dockerfile
+      dockerfile: ./.docker/nest/Dockerfile
     volumes:
       - ./product:/var/www/product
     networks:
       - app-network
+    command: npm run start:dev
+    ports:
+      - 3000:3000
 
   nginx:
     container_name: gateway_nginx
     image: nginx:alpine
     depends_on:
       - laravel
-      - lumen
     ports:
       - 80:80
       - 430:443
     volumes:
-      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./intention/.docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
       - ./:/var/www
     networks:
       - app-network
@@ -78,5 +80,3 @@ networks:
 volumes:
   mysql-data:
     driver: local
-
-
