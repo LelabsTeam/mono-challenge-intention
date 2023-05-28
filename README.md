@@ -14,7 +14,7 @@ DB_PASSWORD=lebiscuit
 6. http://localhost:7020/api/v1/product/index
 - Esse endpoint acima é do tipo GET, serve para listar todos os produtos.
 7. http://localhost:7020/api/v1/buy_intention/store
-{
+- {
     "client_name":"Welliton",
     "address":"Rua A, 1741  - Santa Rita imperatriz-MA",
     "product_id":[1,2]
