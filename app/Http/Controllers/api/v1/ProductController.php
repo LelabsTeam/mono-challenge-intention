@@ -32,4 +32,13 @@ class ProductController extends Controller
             throw $th;
         }
     }
+
+    public function productView(Request $request)
+    {
+        try {
+            return ProductResource::collection($this->productRepository->productView($request->all()));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
