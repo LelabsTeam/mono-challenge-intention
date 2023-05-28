@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 
@@ -19,6 +20,15 @@ class ProductRepository extends RepositoryBase
 
     public function productEdit($id)
     {
-        return json_decode(Http::get('https://fakestoreapi.com/products/'.$id));
+        return ProductResource::make(json_decode(Http::get('https://fakestoreapi.com/products/'.$id)));
+    }
+
+    public function productView($array)
+    {
+        $result = collect();
+        foreach ($array as $key => $value) {
+            $result->add($this->productEdit($array[$key]));
+        }
+        return $result;
     }
 }
