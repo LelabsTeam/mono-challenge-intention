@@ -21,7 +21,7 @@ class BuyIntentionController extends Controller
     public function index()
     {
         try {
-            return BuyIntentionResource::collection($this->buyIntentionRepository->all());
+            return $this->buyIntentionRepository->index();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -30,9 +30,8 @@ class BuyIntentionController extends Controller
     public function store(Request $request)
     {
         try {
-            $product = ProductResource::make($this->productRepository->productEdit($request->product_id));
-            return $this->productRepository->store($product[0])?
-            BuyIntentionResource::make($this->buyIntentionRepository->store($request->all())):false;
+            $request['product_id'] = json_encode($request['product_id']);
+            return BuyIntentionResource::make($this->buyIntentionRepository->store($request->all()));
         } catch (\Throwable $th) {
             throw $th;
         }
