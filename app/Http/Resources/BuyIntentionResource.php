@@ -14,6 +14,11 @@ class BuyIntentionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'client_name' => $this->client_name,
+            'address' => $this->address,
+            'product_id' => json_decode($this->product_id),
+        ];
     }
 }
