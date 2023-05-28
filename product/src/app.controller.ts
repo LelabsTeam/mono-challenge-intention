@@ -8,9 +8,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   
-  @Get()
-  callExternalAPI(): Promise<any> {
-    const response = this.appService.getHelloo();
+  @Get('ping')
+  ping(): {} {
+    const response = this.appService.ping();
     return response;
   }
 }

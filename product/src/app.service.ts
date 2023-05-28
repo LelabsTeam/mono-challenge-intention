@@ -9,10 +9,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getHelloo(): Promise<[]> {
-    const { data } = await firstValueFrom(
-      this.httpService.get<[]>(process.env.FAKE_STORE_BASE_URL+'/products').pipe(),
-    );
-    return data;
+  ping(): {} {
+    return JSON.parse('{"message":"pong"}');
   }
 }
