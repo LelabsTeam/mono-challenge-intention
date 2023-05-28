@@ -17,7 +17,7 @@ class BuyIntentionRepository extends RepositoryBase
 
     public function index()
     {
-        $result = $this->model->get();
+        $result = $this->model->paginate();
         foreach ($result as $key => $value) {
             $value->product_id = $this->productRepository->productView(json_decode($value->product_id));
         }
