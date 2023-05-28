@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('client_name')->nullable();
             $table->string('address')->nullable();
-            $table->foreignId('product_id')->references('id')->on('products');
+            $table->json('product_id')->nullable();
             $table->timestamps();
         });
     }
