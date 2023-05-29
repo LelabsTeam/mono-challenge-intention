@@ -15,16 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(AuthController::class)->prefix('user')->group(function () {
-    Route::post('/login', 'loginUser')->name('login');
+Route::controller(IntentionController::class)->prefix('v1')->as('api.')->group(function () {
 
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/', 'createUser')->name('register');
-        Route::post('/logout', 'logout')->name('logout');
+    Route::controller(AuthController::class)->prefix('user')->group(function () {
+        Route::post('/login', 'loginUser')->name('login');
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/', 'createUser')->name('register');
+            Route::post('/logout', 'logout')->name('logout');
+        });
     });
-});
 
-Route::controller(IntentionController::class)->prefix('v1')->as('intention.')->group(function () {
-    Route::get('intentions', 'index')->name('index');
-    Route::post('intentions', 'store')->middleware('auth:sanctum')->name('store');
+    Route::controller(IntentionController::class)->prefix('intentions')->as('intention.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->middleware('auth:sanctum')->name('store');
+    });
 });
