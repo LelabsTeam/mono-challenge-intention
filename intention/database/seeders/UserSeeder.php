@@ -28,10 +28,12 @@ class UserSeeder extends Seeder
     public function createUsersWithRelations()
     {
         return User::factory(3)
-            ->hasAddress()
             ->has(
                 Intention::factory(5)
-                    ->hasProducts(3),
+                    ->hasProducts(3)
+                    ->hasAddress(1, function (array $attributes, Intention $intention) {
+                        return collect($intention)->only('user_id')->toArray();
+                    }),
                 'intentions'
             )
             ->create();

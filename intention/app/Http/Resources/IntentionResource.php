@@ -16,7 +16,7 @@ class IntentionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
+            'user' => new UserResource($this),
             'products' => ProductResource::collection($this->products),
         ];
     }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('complement')->nullable();
             $table->string('postcode');
+            $table->integer('intention_id');
 
             $table->foreignId('user_id')->constrained();
         });

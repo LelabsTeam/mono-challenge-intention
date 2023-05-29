@@ -24,4 +24,9 @@ class Intention extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

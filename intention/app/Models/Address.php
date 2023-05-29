@@ -15,6 +15,7 @@ class Address extends Model
         'complement',
         'postcode',
         'user_id',
+        'intention_id',
     ];
 
     public function user()

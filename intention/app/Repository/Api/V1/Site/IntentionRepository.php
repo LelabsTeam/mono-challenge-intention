@@ -8,6 +8,13 @@ use Illuminate\Pagination\Paginator;
 
 class IntentionRepository
 {
+    private $relations;
+
+    public function __construct()
+    {
+        $this->relations = ['products', 'user', 'address'];
+    }
+
     /**
      * Busca as intenções
      *
@@ -15,7 +22,7 @@ class IntentionRepository
      */
     public function getAll(): LengthAwarePaginator
     {
-        $intentions = Intention::with(['products', 'user.address'])->orderByDesc('id');
+        $intentions = Intention::with($this->relations)->orderByDesc('id');
 
         return $intentions->paginate(30);
     }
@@ -27,7 +34,7 @@ class IntentionRepository
      */
     public function getById(int $userId): LengthAwarePaginator
     {
-        $intentions = Intention::with(['products', 'user.address'])->whereRelation('user', 'id', 'like', $userId)->orderByDesc('id');
+        $intentions = Intention::with($this->relations)->whereRelation('user', 'id', 'like', $userId)->orderByDesc('id');
 
         return $intentions->paginate(30);
     }
@@ -39,19 +46,19 @@ class IntentionRepository
      */
     public function new(array $request)
     {
-        $intention = auth()->user()
+        $authUser = auth()->user();
+        $intention = $authUser
             ->intentions()
             ->create();
 
         $intention->products()
             ->createMany($request['products']);
 
-        auth()->user()->address()->updateOrCreate(
-            ['postcode' => $request['address']['postcode']],
-            $request['address']
+        $authUser->addresses()->updateOrCreate(
+            ['postcode' => $request['address']['postcode'], 'user_id' => $authUser->id],
+            [...$request['address'], ...['intention_id' => $intention->id]]
         );
 
-        return Intention::with(['products', 'user.address'])->where('id', $intention->id)->first();
-
+        return Intention::with($this->relations)->where('id', $intention->id)->first();
     }
 }

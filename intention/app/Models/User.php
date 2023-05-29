@@ -43,9 +43,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function address()
+    public function addresses()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasMany(Address::class)->orderByDesc('id');
     }
 
     public function intentions()
