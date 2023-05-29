@@ -19,8 +19,14 @@ export class IntentionsService {
       },
     };
     
-    const { data } = await firstValueFrom(
-      this.httpService.post(`${process.env.INTENTIONS_BASE_URL}/intentions`, createIntentionDto, headers).pipe());
-    return data;
+    try {
+
+      const { data } = await firstValueFrom(
+        this.httpService.post(`${process.env.INTENTIONS_BASE_URL}/intentions`, createIntentionDto, headers).pipe());
+      return data;
+
+    } catch (error) {
+      return {message:`${error.message} - verifique os dados enviados`};
+    }
   }
 }
