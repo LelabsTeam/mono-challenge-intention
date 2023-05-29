@@ -8,7 +8,7 @@ export class ProductsService {
 
   async getAll() {
     const { data } = await firstValueFrom(
-      this.httpService.get<[]>(process.env.FAKE_STORE_BASE_URL+'/products').pipe(),
+      this.httpService.get<[]>(`${process.env.FAKE_STORE_BASE_URL}/products`).pipe(),
     );
     return data;
   }
