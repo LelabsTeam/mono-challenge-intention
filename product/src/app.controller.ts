@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  
+  @Get()
+  @Redirect(process.env.PRODUCTS_URL, 301)
+
   @Get('ping')
   ping(): {} {
     const response = this.appService.ping();
