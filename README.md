@@ -8,30 +8,36 @@
  - Docker 20.10.22
  - Git
  ### Rotas de api
-- post /api/v1/intention-service/intentions  - cria uma intenção
-- get /api/v1/intention-service/intentions - lista as intenções
-- post /api/v1/intention-service/login - login (o token recebido será necessário para as rotas de intenção)
-- post /api/v1/intention-service/logout - desloga do sistema
-- post /api/v1/intention-service/register - cria um novo usuário
+
+baseUrl: <http://localhost/api/v1>
+
+- post /intentions  - cria uma intenção - (rota protegida por autenticação)
+- get  /intentions - lista as intenções
+- post /login - login (o token recebido será necessário para a rota de criar intenção)
+- post /logout - desloga do sistema
+- post /register - cria um novo usuário
 ## Serviço de Produtos
 ### Principais tecnologias utilizadas
- - PHP 8.2
- - Composer 2
- - Lumen 10
+ - Node 14
+ - Nest 9
+ - Npm/Yarn 
  - Docker 20.10.22
  - Git
  ### Rotas de api
+baseUrl: <http://localhost:3000/api/v1>
 
-- get /api/v1/product-service/products - lista os produtos
-- post /api/v1/product-service/intentions - envia a requisição pra o serviço de intenções
+- get /products - lista os produtos
+- post /intentions - envia a requisição pra o serviço de intenções (nessessário enviar o token gerado em /auth)
+- post /auth - envia email e senha do usuário para gerar o token de acesso 
 ### Como instalar (necessário ter docker instalado):
  1. Clonar o projeto
  2. `cd project folder`
  3. `./dev-install.sh`
  4. `docker compose exec laravel php artisan migrate --seed` 
+ 5. `docker compose exec nest npm install` 
  6. A aplicação estará disponível em: [http://localhost](http://localhost)
  - Executando comandos do serviço de intenção: `docker compose exec laravel php artisan tinker`
- - Executando comandos do serviço de produtos: `docker compose exec lumen php artisan tinker`
+ - Executando comandos do serviço de produtos: `docker compose exec nest npm install`
 ### Usuário padrão
 - login: admin@admin.com
 - senha: password
