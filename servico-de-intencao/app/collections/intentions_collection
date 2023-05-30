@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "0af27ddd-5943-440c-b3f1-50fd9314cf1f",
+		"name": "intentions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27355677"
+	},
+	"item": [
+		{
+			"name": "intentions",
+			"item": [
+				{
+					"name": "intentions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/intentions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"intentions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "intentions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Luan",
+									"type": "text"
+								},
+								{
+									"key": "product",
+									"value": "Game",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Rio de Janeiro",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3333/intentions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"intentions"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "produc",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
